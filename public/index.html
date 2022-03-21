@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="index.css">
+  <title>Sign Up</title>
+</head>
+<body>
+  <main>
+    <section>
+      <div class="form-group">
+        <h1>Sign Up</h1>
+        <input type="text" id="firstName" placeholder="First Name">
+        <input type="text" id="lastName" placeholder="Last Name">
+        <input class="full-width" type="email" id="email" placeholder="Email address">
+        <input class="full-width" id="date" type="date">
+        <button id="btn">Submit</button>
+      </div>
+      <a href="schedule.html">
+        <button>View Schedule</button>
+      </a>
+    </section>
+  </main>
+  <script>
+    const btn = document.getElementById('btn')
+    let firstName = document.getElementById('firstName')
+    let lastName = document.getElementById('lastName')
+    let email = document.getElementById('email')
+    let date = document.getElementById('date')
+
+    btn.addEventListener('click', async info => {
+      const data = {
+        'first_name': firstName.value,
+        'last_name': lastName.value,
+        'email': email.value,
+        'date': date.value
+      }
+      const options = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(data)
+        }
+      const response = await fetch('/api', options)
+      const json = await response.json()
+      console.log(json)
+    })
+  </script>
+</body>
+</html>
